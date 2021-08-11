@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrewComponent implements OnInit {
 
-  memberBeingEdited:object = null;
+  memberBeingEdited: object = null;
 
   crew: object[] = [
     { name: "Eileen Collins", firstMission: false },
@@ -21,7 +21,15 @@ export class CrewComponent implements OnInit {
   }
 
   add(name: string, isFfirst: boolean) {
-    this.crew.push({ name: name, firstMission: isFfirst });
+    let flag: boolean = true;
+    for (let i = 0; i < this.crew.length; i++) {
+      if (this.crew[i]['name'] === name) {
+        flag = false;
+      }
+    }
+    if (flag && name!=="") {
+      this.crew.push({ name: name, firstMission: isFfirst });
+    }
   }
 
   remove(member: object) {
@@ -31,12 +39,12 @@ export class CrewComponent implements OnInit {
     }
   }
 
-  edit(member: object){
+  edit(member: object) {
     this.memberBeingEdited = member;
   }
 
-  save(name: string, member: object){    
-    member['name']=name;
+  save(name: string, member: object) {
+    member['name'] = name;
     this.memberBeingEdited = null;
   }
 
