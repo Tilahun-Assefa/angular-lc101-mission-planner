@@ -1,7 +1,13 @@
 <div class="displayBox">
     <h3>Possible Experiments</h3>
     <ul>
-      <li *ngFor="let experiment of experiments">{{experiment}}</li>
+      <li [class.selected]="executedExperiments.indexOf(experiment) >= 0" *ngFor="let experiment of experiments" (click)="addExperiment(experiment)">{{experiment}}</li>
     </ul>
 </div>
 <hr>
+<div>
+  <h3>Completed Experiments</h3>
+  <ul>
+    <li (click)="removeItem(done)" *ngFor="let done of executedExperiments">{{done}}</li>
+  </ul>
+</div>
